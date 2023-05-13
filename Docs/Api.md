@@ -1,3 +1,125 @@
+# API
+
+- [My App API](#api)  
+    - [Authentication](#authentication)  
+        - [Register](#register)  
+            - [Request](#request)  
+            - [Response](#response)  
+        - [Login](#login)  
+            - [Request](#request-1)  
+            - [Response](#response-1)  
+    - [Register Wallet](#register-wallet)  
+        - [Request](#request-2)  
+        - [Response](#response-2)  
+    - [Get Players Balance](#get-players-balance)  
+        - [Request](#request-3)  
+        - [Response](#response-3)  
+    - [Credit Transaction to Player's Wallet](#credit-transaction-to-players-wallet)  
+        - [Request](#request-4)  
+        - [Response](#response-4)  
+    - [Get Player's Transactions](#get-players-transactions)  
+        - [Request](#request-5)  
+        - [Response](#response-5)  
+
+## Authentication
+
+### Register
+
+Registers a new user.
+
+#### Request
+
+```js
+POST /auth/register
+Content-Type: application/json
+```
+
+```json
+{   
+    "first_name": "first_name",
+    "last_name": "last_name",
+    "email": "email",
+    "username": "username",
+    "password": "password"
+}
+```
+
+#### Response
+
+Successful Registration
+```js
+HTTP/1.1 201 Created
+Content-Type: application/json
+```
+
+```json
+{   
+    "username": "username",
+    "token" : "token"
+}
+```
+
+Error Response
+```js
+HTTP/1.1 500 Internal Server Error
+Content-Type: application/json
+```
+
+```json
+{   
+    "error": {
+        "code": 500,
+        "message": "Internal Server Error"
+    }
+}
+```
+
+### Login
+
+Logs in a user.
+
+#### Request
+
+```js
+POST /auth/login
+Content-Type: application/json
+```
+
+```json
+{   
+    "username": "username",
+    "password": "password"
+}
+```
+
+#### Response
+
+Successful Login
+```js
+HTTP/1.1 200 OK
+```
+
+```json
+{
+    "status": "success"
+}
+```
+
+Error Response
+```js
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json
+```
+
+```json
+{   
+    "error": {
+        "code": 401,
+        "message": "Unauthorized"
+    }
+}
+```
+
 ## Register Wallet
 
 Registers a new wallet for a player.
@@ -11,8 +133,7 @@ Content-Type: application/json
 
 ```json
 {   
-    "player_id": "d89f4a1e-9c5b-4e4a-8c0e-0e8a5a1a1a1a",
-    "token" : "token"
+    "player_id": "d89f4a1e-9c5b-4e4a-8c0e-0e8a5a1a1a1a"
 }
 ```
 
@@ -26,8 +147,7 @@ Content-Type: application/json
 
 ```json
 {   
-    "player_id": "d89f4a1e-9c5b-4e4a-8c0e-0e8a5a1a1a1a",
-    "token" : "token"
+    "player_id": "d89f4a1e-9c5b-4e4a-8c0e-0e8a5a1a1a1a"
 }
 ```
 Error Response
