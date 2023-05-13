@@ -11,5 +11,9 @@ artifacts/
 !.vscode/extensions.json
 *.code-workspace
 
+# Build results
+obj/
+bin/
+
 # My personal preferences
 Requests/
