@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Wallet.Contracts\Wallet.Contracts.csproj" />
     <ProjectReference Include="..\Wallet.Application\Wallet.Application.csproj" />
   </ItemGroup>
