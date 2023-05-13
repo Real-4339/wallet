@@ -10,3 +10,6 @@ artifacts/
 !.vscode/launch.json
 !.vscode/extensions.json
 *.code-workspace
+
+# My personal preferences
+Requests/
