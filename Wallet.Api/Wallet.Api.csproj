@@ -1,14 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>4c2b6412-2453-4b92-a666-76005d8bc703</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Wallet.Contracts\Wallet.Contracts.csproj" />
+    <ProjectReference Include="..\Wallet.Dtos\Wallet.Dtos.csproj" />
     <ProjectReference Include="..\Wallet.Application\Wallet.Application.csproj" />
+    <ProjectReference Include="..\Wallet.DI\Wallet.DI.csproj" />
   </ItemGroup>
 
 </Project>
