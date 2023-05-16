@@ -5,7 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Options;
 using System.Security.Claims;
 using System.Text;
-using Wallets.Domain.User.Entities;
+using Wallet.Domain.User.Entities;
 
 namespace Wallet.Infrastructure.Auth;
 

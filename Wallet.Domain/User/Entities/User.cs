@@ -1,4 +1,4 @@
-namespace Wallets.Domain.User.Entities;
+namespace Wallet.Domain.User.Entities;
 
 public class User
 {
