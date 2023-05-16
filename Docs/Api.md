@@ -36,11 +36,11 @@ Content-Type: application/json
 
 ```json
 {   
-    "first_name": "first_name",
-    "last_name": "last_name",
-    "email": "email",
-    "username": "username",
-    "password": "password"
+    "firstName": "firstName",
+    "lastName": "lastName",
+    "Email": "email",
+    "Username": "username",
+    "Password": "password"
 }
 ```
 
