@@ -1,4 +1,4 @@
-using Wallets.Domain.User.Entities;
+using Wallet.Domain.User.Entities;
 
 namespace Wallet.Application.Common.Interfaces.Auth;
 
