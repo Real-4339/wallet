@@ -23,7 +23,7 @@ public class AuthService : IAuthService
         // Check if user exists
         if (_authRepository.GetUserByUsername(Username) is not null)
         {
-            throw new Exception("Username already exists");
+            throw new Exception("Internal Server Error");
         }
 
         // Create a new user
@@ -49,12 +49,12 @@ public class AuthService : IAuthService
     {
         // Check if user exists
         User user = _authRepository.GetUserByUsername(username) as User
-            ?? throw new Exception("User not found");
+            ?? throw new UnauthorizedAccessException("Unauthorized");
 
         // Validate password
         if (user.Password != password)
         {
-            throw new Exception("Invalid password");
+            throw new UnauthorizedAccessException("Unauthorized");
         }
 
         return new AuthLogResult("success");
