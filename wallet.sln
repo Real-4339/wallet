@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet.Infrastructure", "Wa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet.Domain", "Wallet.Domain\Wallet.Domain.csproj", "{95543F65-095F-4D12-A2AE-C65D9F27D8C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet.Contracts", "Wallet.Contracts\Wallet.Contracts.csproj", "{82B6D010-A37D-418A-A4A2-6034F8BEA540}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet.Dtos", "Wallet.Dtos\Wallet.Dtos.csproj", "{82B6D010-A37D-418A-A4A2-6034F8BEA540}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet.Application", "Wallet.Application\Wallet.Application.csproj", "{FA6956CF-ECC8-49CE-886A-9C13D146584D}"
 EndProject
