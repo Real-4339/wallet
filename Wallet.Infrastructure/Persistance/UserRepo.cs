@@ -1,7 +1,7 @@
 using Wallet.Application.Common.Interfaces.Persistence;
-using Wallets.Domain.User.Entities;
+using Wallet.Domain.User.Entities;
 
-namespace Wallets.Infrastucture.Persistence;
+namespace Wallet.Infrastucture.Persistence;
 
 public class UserRepo : IUserRepo
 {
@@ -20,10 +20,5 @@ public class UserRepo : IUserRepo
     public void AddUser(User user)
     {
         _users.Add(user);
-    }
-
-    public int GetLength()
-    {
-        return _users.Count;
     }
 }
