@@ -1,6 +1,6 @@
 using Wallet.Application.Common.Interfaces.Persistence;
 using Wallet.Application.Common.Interfaces.Auth;
-using Wallets.Domain.User.Entities;
+using Wallet.Domain.User.Entities;
 
 namespace Wallet.Application.Services.Auth;
 
@@ -21,7 +21,6 @@ public class AuthService : IAuthService
     public AuthRegResult Register(string firstName, string lastName, string Email, string Username, string Password)
     {      
         // Check if user exists
-        Console.WriteLine(_authRepository.GetLength());
         if (_authRepository.GetUserByUsername(Username) is not null)
         {
             throw new Exception("Username already exists");
@@ -39,9 +38,10 @@ public class AuthService : IAuthService
         };
         
         _authRepository.AddUser(user);
-        Console.WriteLine(_authRepository.GetLength());
+
         // Generate a new token
         var token = _jwtTokenGenerator.GenerateToken(user);
+        
         return new AuthRegResult(user, token);
     }
 
