@@ -54,6 +54,7 @@ Content-Type: application/json
 
 ```json
 {   
+    "id" : "d89f4a1e-9c5b-4e4a-8c0e-0e8a5a1a1a1a",
     "username": "username",
     "token" : "token"
 }
@@ -147,7 +148,7 @@ Content-Type: application/json
 
 ```json
 {   
-    "player_id": "d89f4a1e-9c5b-4e4a-8c0e-0e8a5a1a1a1a"
+    "status": "success"
 }
 ```
 Error Response
@@ -204,7 +205,6 @@ Content-Type: application/json
 ```json
 {   
     "player_id": "d89f4a1e-9c5b-4e4a-8c0e-0e8a5a1a1a1a",
-    "transaction_id": "transaction-guid",
     "transaction_type": "deposit",
     "amount": 100
 }
