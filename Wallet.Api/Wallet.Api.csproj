@@ -11,6 +11,7 @@
     <ProjectReference Include="..\Wallet.Dtos\Wallet.Dtos.csproj" />
     <ProjectReference Include="..\Wallet.Application\Wallet.Application.csproj" />
     <ProjectReference Include="..\Wallet.DI\Wallet.DI.csproj" />
+    <ProjectReference Include="..\Wallet.Infrastructure\Wallet.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
