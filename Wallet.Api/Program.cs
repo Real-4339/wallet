@@ -1,3 +1,4 @@
+using Wallet.Api.Middleware;
 using Wallet.DI;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,9 +12,9 @@ var builder = WebApplication.CreateBuilder(args);
 }
 
 var app = builder.Build();
-{
+{   
+    app.UseMiddleware<ErrorHandler>();
     app.UseHttpsRedirection();
     app.MapControllers();
-
     app.Run();
 }
