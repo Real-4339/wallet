@@ -1,14 +1,14 @@
 using Api.Middleware;
-using DI;
+using Application;
+using Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 {   
     // Add services to the container.
     builder.Services
+        .AddPresentation()
         .AddApplication()
         .AddInfrastructure(builder.Configuration);
-    builder.Services.AddControllers();
-    builder.Services.AddEndpointsApiExplorer();
 }
 
 var app = builder.Build();
