@@ -24,4 +24,4 @@ tests:
 	@dotnet test src/Tests/
 	@echo "Tests ran!"
 
-net: clean run
+net: run
