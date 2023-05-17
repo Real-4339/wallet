@@ -1,5 +1,6 @@
-using System.Net;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json;
+using System.Net;
 using Api.Errors;
 
 namespace Api.Middleware;
@@ -31,13 +32,14 @@ public class ErrorHandler
         if (exception is BadRequestError) code = HttpStatusCode.BadRequest; // 400
         else if (exception is KeyNotFoundException) code = HttpStatusCode.NotFound; // 404
         else if (exception is UnauthorizedAccessException) code = HttpStatusCode.Unauthorized; // 401
+        else if (exception is ValidationException) code = HttpStatusCode.Conflict; // 409
     
         var result = JsonSerializer.Serialize(new 
         {
             error = new 
             {   
-                code = code,
-                message = exception.Message,
+               code = code,
+               message = exception.Message,
             }
         });
         context.Response.ContentType = "application/json";
