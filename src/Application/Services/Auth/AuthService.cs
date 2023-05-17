@@ -4,7 +4,7 @@ using Domain.User.Entities;
 
 namespace Application.Services.Auth;
 
-public class AuthService : IAuthService
+public class AuthService : IAuthCommandService
 {
     private readonly IUserRepo _authRepository;
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
