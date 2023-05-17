@@ -4,7 +4,6 @@ using Application.Common.Interfaces.Auth;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Infrastucture.Persistence;
-using Application.Services.Auth;
 using Infrastructure.Auth;
 
 namespace DI;
@@ -12,9 +11,12 @@ namespace DI;
 public static class DependencyInjection
 {
     public static IServiceCollection AddApplication(this IServiceCollection services)
-    {
-        services.AddScoped<IAuthService, AuthService>();
-
+    {   
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(
+            Application.Auth.Commands.Register.RegisterCommandHandler).Assembly, 
+            typeof(Application.Auth.Queries.Login.LoginQueryHandler).Assembly,
+            typeof(Application.Auth.Common.AuthLogResult).Assembly,
+            typeof(Application.Auth.Common.AuthRegResult).Assembly));
         return services;
     }
     public static IServiceCollection AddInfrastructure(
@@ -30,4 +32,4 @@ public static class DependencyInjection
 
         return services;
     }
-} 
+}
