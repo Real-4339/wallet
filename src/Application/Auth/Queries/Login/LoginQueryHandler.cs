@@ -22,7 +22,9 @@ public class LoginQueryHandler : IRequestHandler<LoginQuery, AuthLogResult>
     }
 
     public async Task<AuthLogResult> Handle(LoginQuery query, CancellationToken cancellationToken)
-    {
+    {   
+        await Task.CompletedTask;
+
         // Check if user exists
         User user = _authRepository.GetUserByUsername(query.Username) as User
             ?? throw new UnauthorizedAccessException("Unauthorized");

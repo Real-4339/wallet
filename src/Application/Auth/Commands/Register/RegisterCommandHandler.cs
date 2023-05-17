@@ -21,7 +21,9 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, AuthRegRe
     }
     
     public async Task<AuthRegResult> Handle(RegisterCommand command, CancellationToken cancellationToken)
-    {
+    {   
+        await Task.CompletedTask;
+
          // Check if user exists
         if (_authRepository.GetUserByUsername(command.Username) is not null)
         {
@@ -32,8 +34,8 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, AuthRegRe
         var user = new User
         {
             Id = Guid.NewGuid(),
-            firstName = command.firstName,
-            lastName = command.lastName,
+            firstName = command.FirstName,
+            lastName = command.LastName,
             Email = command.Email,
             Username = command.Username,
             Password = command.Password
