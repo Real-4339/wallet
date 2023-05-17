@@ -1,31 +1,33 @@
+using Application.Auth.Commands.Register;
+using Application.Auth.Queries.Login;
 using Microsoft.AspNetCore.Mvc;
-using Application.Services.Auth;
 using Dtos.Authentication;
+using MediatR;
 
 namespace Api.Controllers;
 
-
-[ApiController]
 [Route("auth")]
-public class AuthController : ControllerBase
+public class AuthController : ApiController
 {
-    private readonly IAuthService _authService;
+    private readonly ISender _mediator;
 
-    public AuthController(IAuthService authService)
+    public AuthController(
+        ISender mediator)
     {
-        _authService = authService;
+        _mediator = mediator;
     }
 
     [HttpPost("register")]
-    public IActionResult Register(RegisterRequest request)
+    public async Task<IActionResult> Register(RegisterRequest request)
     {   
-        var authRegResult = _authService.Register(
+        var command = new RegisterCommand(
             request.firstName, 
             request.lastName, 
-            request.Email, 
+            request.Email,
             request.Username, 
             request.Password
         );
+        var authRegResult = await _mediator.Send(command);
 
         var response = new RegisterResponse(
             authRegResult.User.Id,
@@ -36,12 +38,12 @@ public class AuthController : ControllerBase
         return Ok(response);
     }
     [HttpPost("login")]
-    public IActionResult Login(LoginRequest request)
+    public async Task<IActionResult> Login(LoginRequest request)
     {
-        var authLogResult = _authService.Login(
+        var authLogResult = await _mediator.Send(new LoginQuery(
             request.Username, 
             request.Password
-        );
+        ));
 
         var response = new LoginResponse(
             authLogResult.Status
