@@ -4,7 +4,7 @@ project.fragment.lock.json
 artifacts/
 
 # VS Code files for those working on multiple tools
-.vscode/*
+.vscode/
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
