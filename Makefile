@@ -5,8 +5,8 @@
 # Targets
 clean:
 	@echo "Cleaning up..."
-	@find src -name "obj" -type d -exec rm -rf {} \;
-	@find src -name "bin" -type d -exec rm -rf {} \;
+	@sudo find src -name "obj" -type d -exec rm -rf {} \;
+	@sudo find src -name "bin" -type d -exec rm -rf {} \;
 	@echo "Cleaned! (removed obj/ and bin/ directories)"
 
 build:
@@ -16,12 +16,12 @@ build:
 
 run:
 	@echo "Running..."
-	@dotnet run --project src/Wallet.Api/
+	@dotnet run --project src/Api/
 	@echo "Ran!"
 
 tests: 
 	@echo "Running tests..."
-	@dotnet test src/Wallet.Tests/
+	@dotnet test src/Tests/
 	@echo "Tests ran!"
 
-net: clean run	
+net: clean run
