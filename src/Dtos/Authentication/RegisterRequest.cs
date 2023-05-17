@@ -1,8 +1,8 @@
 namespace Dtos.Authentication;
 
 public record RegisterRequest(
-    string firstName,
-    string lastName,
+    string FirstName,
+    string LastName,
     string Email,
     string Username,
     string Password

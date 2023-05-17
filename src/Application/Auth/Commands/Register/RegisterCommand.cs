@@ -4,8 +4,8 @@ using MediatR;
 namespace Application.Auth.Commands.Register;
 
 public record RegisterCommand(
-    string firstName,
-    string lastName,
+    string FirstName,
+    string LastName,
     string Email,
     string Username,
     string Password
