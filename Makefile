@@ -5,8 +5,8 @@
 # Targets
 clean:
 	@echo "Cleaning up..."
-	@sudo find src -name "obj" -type d -exec rm -rf {} \;
-	@sudo find src -name "bin" -type d -exec rm -rf {} \;
+	@find src/ -depth -name "obj" -type d -exec rm -rf {} \;
+	@find src/ -depth -name "bin" -type d -exec rm -rf {} \;
 	@echo "Cleaned! (removed obj/ and bin/ directories)"
 
 build:
