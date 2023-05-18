@@ -21,11 +21,7 @@ public class RegisterValidationCommandBehaviour :
         RequestHandlerDelegate<AuthRegResult> next,
         CancellationToken cancellationToken)
     {   
-        Console.WriteLine("before");
-        
         var result = await _validator.ValidateAsync(request, cancellationToken);
-
-        Console.WriteLine("result");
 
         if (!result.IsValid)
         {
