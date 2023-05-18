@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Application.Auth.Commands.Register;
 using Application.Auth.Queries.Login;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +8,7 @@ using MediatR;
 
 namespace Api.Controllers;
 
+[AllowAnonymous]
 [Route("auth")]
 public class AuthController : ApiController
 {
