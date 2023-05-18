@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Api.Mapping;
+using Api.Errors;
 
 namespace Infrastructure;
 
@@ -9,6 +11,7 @@ public static class DependencyInjection
     {   
 
         services.AddControllers();
+        //services.AddSingleton<ProblemDetailsFactory, ErrorFactory>();
         services.AddEndpointsApiExplorer();
         services.AddMappings();
 
