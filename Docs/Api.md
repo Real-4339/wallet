@@ -128,7 +128,7 @@ Registers a new wallet for a player.
 ### Request
 
 ```js
-POST /register_wallet
+POST /wallet/register
 Content-Type: application/json
 ```
 
@@ -173,7 +173,8 @@ Gets the balance of a player.
 ### Request
 
 ```js
-GET /get_players_balance/:player_id
+GET /wallet/:player_id
+Authorization: Bearer {{token}}
 ```
 
 ### Response
@@ -198,8 +199,9 @@ Credits a transaction to a player's wallet.
 ### Request
 
 ```js
-POST /credit_transaction
+POST /transactions/credit
 Content-Type: application/json
+Authorization: Bearer {{token}}
 ```
 
 ```json
@@ -250,7 +252,8 @@ Retrieves a list of saved transactions for a given player, with optional filteri
 ### Request
 
 ```js
-GET /player_transactions/{player_id}?types=deposit,stake
+GET /transaction/{player_id}?types=deposit,stake
+Authorization: Bearer {{token}}
 ```
 
 ### Response
