@@ -1,11 +1,10 @@
 using Microsoft.Extensions.DependencyInjection;
 using Application.Auth.Commands.Register;
-using Application.Common.Behaviors;
+using Application.Auth.Behaviors;
 using Application.Auth.Common;
 using System.Reflection;
 using FluentValidation;
 using MediatR;
-using OneOf;
 
 namespace Application;
 
