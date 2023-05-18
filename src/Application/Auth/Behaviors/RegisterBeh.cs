@@ -2,9 +2,8 @@ using Application.Auth.Commands.Register;
 using Application.Auth.Common;
 using FluentValidation;
 using MediatR;
-using OneOf;
 
-namespace Application.Common.Behaviors;
+namespace Application.Auth.Behaviors;
 
 public class RegisterValidationCommandBehaviour :
     IPipelineBehavior<RegisterCommand, AuthRegResult>
