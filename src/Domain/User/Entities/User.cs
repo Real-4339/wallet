@@ -1,6 +1,9 @@
+using Domain.Common.Primitives;
+using Domain.User.ValueObjects;
+
 namespace Domain.User.Entities;
 
-public class User
+public class User // : AggregateRoot<UserId>
 {
     public Guid Id { get; set; }
     public string firstName { get; set; } = null!;
