@@ -7,9 +7,10 @@ public class RegisterWalletCommandHandler : IRequestHandler<RegisterWalletComman
 {
     public Task<StatusResult> Handle(RegisterWalletCommand command, CancellationToken cancellationToken)
     {
-        // Create wallet
-        // Add wallet to user
+        // Find user
+        // Check if user already has a wallet
+        // Register wallet
         // Return status result
-        throw new NotImplementedException();
+        return Task.FromResult(new StatusResult("true"));
     }
 }
