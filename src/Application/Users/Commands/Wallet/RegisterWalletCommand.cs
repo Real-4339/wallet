@@ -4,5 +4,5 @@ using MediatR;
 namespace Application.Users.Commands.Wallet;
 
 public record RegisterWalletCommand(
-    string UserId
+    Guid UserId
 ) : IRequest<StatusResult> ;

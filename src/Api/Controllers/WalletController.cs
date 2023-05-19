@@ -24,7 +24,7 @@ public class WalletController : ApiController
     [HttpPost]
     public async Task<IActionResult> Create(
         RegisterWalletRequest request,
-        string userId)
+        Guid userId)
     {   
         var command = new RegisterWalletCommand(userId);
         var walletResult = await _mediator.Send(command);
