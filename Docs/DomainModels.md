@@ -12,6 +12,16 @@ class User {
 }
 ```
 
+```csharp
+class Wallet {
+    Wallet Create();
+    void UpdateBalance();
+    void AddTransaction();
+}
+```
+
+> Wallet is an Entity, User is an Aggregate Root
+
 ```json
 {
     "Id" : { "value" : "d89f4a1e-9c5b-4e4a-8c0e-0e8a5a1a1a1a" },
@@ -21,12 +31,11 @@ class User {
     "Username" : "johndoe",
     "Password" : "password-hash",
     "Wallet" : {
+        "Id" : { "value" : "wallet-guid" },
         "Balance" : 1000,
-        "Transactions" : [
+        "Txs" : [
             {
-                "Id" : { "value" : "transaction-guid" },
-                "Type" : "deposit",
-                "Amount" : 100
+                {"value" : "transaction-guid"},
             }
         ]
     }
@@ -38,15 +47,15 @@ class User {
 ```csharp
 class Tx {
     Tx Create();
-    void Commit();
-    // TODO: Add remaining methods
 }
 ```
+
+> Tx types: deposit, stake, win
 
 ```json
 {
     "Id" : {"value" : "transaction-guid"},
-    "PlayerId" : {"value" : "d89f4a1e-9c5b-4e4a-8c0e-0e8a5a1a1a1a"},
+    "UserId" : {"value" : "d89f4a1e-9c5b-4e4a-8c0e-0e8a5a1a1a1a"},
     "Type" : "deposit",
     "Amount" : 100
 }
