@@ -1,6 +1,6 @@
 using Domain.UserAggregate;
 
-namespace Application.Auth.Common;
+namespace Application.Auth.Results;
 
 public record AuthRegResult(
     User User,

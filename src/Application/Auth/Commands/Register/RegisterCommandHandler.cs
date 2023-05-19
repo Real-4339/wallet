@@ -1,6 +1,6 @@
 using Application.Common.Interfaces.Persistence;
 using Application.Common.Interfaces.Auth;
-using Application.Auth.Common;
+using Application.Auth.Results;
 using Domain.UserAggregate;
 using MediatR;
 

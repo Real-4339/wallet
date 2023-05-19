@@ -1,4 +1,4 @@
-using Application.Auth.Common;
+using Application.Auth.Results;
 using MediatR;
 
 namespace Application.Auth.Commands.Register;

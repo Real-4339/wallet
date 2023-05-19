@@ -1,5 +1,5 @@
 using Application.Auth.Commands.Register;
-using Application.Auth.Common;
+using Application.Auth.Results;
 using FluentValidation;
 using MediatR;
 

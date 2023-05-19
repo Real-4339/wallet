@@ -1,4 +1,4 @@
-using Application.Auth.Common;
+using Application.Auth.Results;
 using Dtos.Authentication;
 using Mapster;
 

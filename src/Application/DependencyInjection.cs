@@ -1,7 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Application.Auth.Commands.Register;
 using Application.Auth.Behaviors;
-using Application.Auth.Common;
+using Application.Auth.Results;
 using System.Reflection;
 using FluentValidation;
 using MediatR;
