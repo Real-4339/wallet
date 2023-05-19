@@ -5,9 +5,8 @@
 ```csharp
 class User {
     User Create();
-    void CreateWallet();
+    void RegisterWallet();
     void Update();
-    void UpdateWallet();
     void Delete();
 }
 ```
