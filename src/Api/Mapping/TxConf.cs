@@ -9,6 +9,9 @@ public class TxConf : IRegister
 {
     public void Register(TypeAdapterConfig config)
     {
+        config.NewConfig<CreditTxCommand, CreditRequest>()
+            .Map(dest => dest, src => src);
+
         config.NewConfig<StatusResult, CreditResponse>()
             .Map(dest => dest, src => src);
     }
