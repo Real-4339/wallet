@@ -1,7 +1,4 @@
 
-# Variables
-
-
 # Targets
 clean:
 	@echo "Cleaning up..."
