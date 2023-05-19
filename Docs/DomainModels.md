@@ -6,6 +6,7 @@
 class User {
     User Create();
     void RegisterWallet();
+    decimal GetBalance();
     void Update();
     void Delete();
 }
