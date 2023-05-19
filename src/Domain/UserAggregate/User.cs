@@ -50,4 +50,11 @@ public sealed class User : AggregateRoot<UserId>
         Wallet = UserWallet.Create(balance);
     }
 
+    public decimal GetBalance(){
+        if (Wallet == null){
+            throw new Exception("User does not have a wallet");
+        }
+        return Wallet.GetBalance();
+    }
+
 }
