@@ -1,7 +1,7 @@
 namespace Dtos.Authentication;
 
 public record RegisterResponse(
-    Guid id,
+    Guid Id,
     string Username,
     string Token
 );
