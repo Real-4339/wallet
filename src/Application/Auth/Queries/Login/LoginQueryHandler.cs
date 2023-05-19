@@ -2,7 +2,7 @@
 using Application.Common.Interfaces.Persistence;
 using Application.Common.Interfaces.Auth;
 using Application.Auth.Common;
-using Domain.User.Entities;
+using Domain.User;
 using MediatR;
 
 namespace Application.Auth.Queries.Login;

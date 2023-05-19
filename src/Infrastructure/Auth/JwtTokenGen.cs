@@ -5,7 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Options;
 using System.Security.Claims;
 using System.Text;
-using Domain.User.Entities;
+using Domain.User;
 
 namespace Infrastructure.Auth;
 
