@@ -1,4 +1,4 @@
-using Application.Auth.Common;
+using Application.Common.Results;
 using MediatR;
 
 namespace Application.Auth.Queries.Login;
@@ -6,4 +6,4 @@ namespace Application.Auth.Queries.Login;
 public record LoginQuery(
     string Username,
     string Password
-) : IRequest<AuthLogResult>;
+) : IRequest<StatusResult>;

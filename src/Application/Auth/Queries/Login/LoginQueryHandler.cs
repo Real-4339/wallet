@@ -1,13 +1,13 @@
 
 using Application.Common.Interfaces.Persistence;
 using Application.Common.Interfaces.Auth;
-using Application.Auth.Common;
+using Application.Common.Results;
 using Domain.UserAggregate;
 using MediatR;
 
 namespace Application.Auth.Queries.Login;
 
-public class LoginQueryHandler : IRequestHandler<LoginQuery, AuthLogResult>
+public class LoginQueryHandler : IRequestHandler<LoginQuery, StatusResult>
 {
     private readonly IUserRepo _authRepository;
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
@@ -21,7 +21,7 @@ public class LoginQueryHandler : IRequestHandler<LoginQuery, AuthLogResult>
         _jwtTokenGenerator = jwtTokenGenerator;
     }
 
-    public async Task<AuthLogResult> Handle(LoginQuery query, CancellationToken cancellationToken)
+    public async Task<StatusResult> Handle(LoginQuery query, CancellationToken cancellationToken)
     {   
         await Task.CompletedTask;
 
@@ -35,6 +35,6 @@ public class LoginQueryHandler : IRequestHandler<LoginQuery, AuthLogResult>
             throw new UnauthorizedAccessException("Unauthorized");
         }
 
-        return new AuthLogResult("success");
+        return new StatusResult("success");
     }
 }
