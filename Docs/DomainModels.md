@@ -17,6 +17,7 @@ class Wallet {
     Wallet Create();
     void UpdateBalance();
     void AddTransaction();
+    decimal GetBalance();
 }
 ```
 

@@ -51,4 +51,8 @@ public sealed class UserWallet : Entity<UserWalletId>
             throw new Exception("Invalid transaction type");
         }
     }
+    
+    public decimal GetBalance(){
+        return Balance;
+    }
 }
