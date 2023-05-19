@@ -9,7 +9,7 @@ public class UserRepo : IUserRepo
 
     public User? GetUserById(Guid id)
     {
-        return _users.SingleOrDefault(u => u.Id == id);
+        return _users.SingleOrDefault(u => u.Id.Equals(id));
     }
 
     public User? GetUserByUsername(string username)
