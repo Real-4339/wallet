@@ -216,11 +216,7 @@ Content-Type: application/json
 
 ```json
 {   
-    "userId": "d89f4a1e-9c5b-4e4a-8c0e-0e8a5a1a1a1a",
-    "transactionId": "transaction-guid",
-    "transactionIype": "deposit",
-    "amount": 100,
-    "balance": 200
+    "status": "accepted/rejected"
 }
 ```
 
