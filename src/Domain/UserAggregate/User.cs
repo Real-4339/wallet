@@ -1,3 +1,5 @@
+using Domain.TransactionsAggregate.ValueObjects;
+using Domain.TransactionsAggregate.Enums;
 using Domain.UserAggregate.ValueObjects;
 using Domain.UserAggregate.Entities;
 using Domain.Common.Primitives;
@@ -55,6 +57,14 @@ public sealed class User : AggregateRoot<UserId>
             throw new Exception("User does not have a wallet");
         }
         return Wallet.GetBalance();
+    }
+
+    public void AddTransaction(TxId txId, decimal amount, TransactionType type){
+        if (Wallet == null){
+            throw new Exception("User does not have a wallet");
+        }
+        Wallet.AddTransaction(txId);
+        Wallet.UpdateBalance(amount, type);
     }
 
 }
