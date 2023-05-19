@@ -40,7 +40,7 @@ Content-Type: application/json
     "lastName": "lastName",
     "Email": "email",
     "Username": "username",
-    "Password": "password"
+    "Password": "password-hash"
 }
 ```
 
@@ -89,7 +89,7 @@ Content-Type: application/json
 ```json
 {   
     "username": "username",
-    "password": "password"
+    "password": "password-hash"
 }
 ```
 
@@ -134,7 +134,7 @@ Content-Type: application/json
 
 ```json
 {   
-    "player_id": "d89f4a1e-9c5b-4e4a-8c0e-0e8a5a1a1a1a"
+    "playerId": "d89f4a1e-9c5b-4e4a-8c0e-0e8a5a1a1a1a"
 }
 ```
 
@@ -187,7 +187,7 @@ Content-Type: application/json
 
 ```json
 {   
-    "player_id": "d89f4a1e-9c5b-4e4a-8c0e-0e8a5a1a1a1a",
+    "playerId": "d89f4a1e-9c5b-4e4a-8c0e-0e8a5a1a1a1a",
     "balance": 100
 }
 ```
@@ -206,8 +206,8 @@ Authorization: Bearer {{token}}
 
 ```json
 {   
-    "player_id": "d89f4a1e-9c5b-4e4a-8c0e-0e8a5a1a1a1a",
-    "transaction_type": "deposit",
+    "playerId": "d89f4a1e-9c5b-4e4a-8c0e-0e8a5a1a1a1a",
+    "transactionType": "deposit",
     "amount": 100
 }
 ```
@@ -222,9 +222,9 @@ Content-Type: application/json
 
 ```json
 {   
-    "player_id": "d89f4a1e-9c5b-4e4a-8c0e-0e8a5a1a1a1a",
-    "transaction_id": "transaction-guid",
-    "transaction_type": "deposit",
+    "playerId": "d89f4a1e-9c5b-4e4a-8c0e-0e8a5a1a1a1a",
+    "transactionId": "transaction-guid",
+    "transactionIype": "deposit",
     "amount": 100,
     "balance": 200
 }
@@ -286,15 +286,15 @@ Content-Type: application/json
 
 Error Response
 ```js
-HTTP/1.1 404 Not Found
+HTTP/1.1 400 Bad Request
 Content-Type: application/json
 ```
 
 ```json
 {   
     "error": {
-        "code": 404,
-        "message": "Player not found"
+        "code": 400,
+        "message": "Bad Request"
     }
 }
 ```
