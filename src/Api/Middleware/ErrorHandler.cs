@@ -33,6 +33,7 @@ public class ErrorHandler
         else if (exception is KeyNotFoundException) code = HttpStatusCode.NotFound; // 404
         else if (exception is UnauthorizedAccessException) code = HttpStatusCode.Unauthorized; // 401
         else if (exception is ValidationException) code = HttpStatusCode.Conflict; // 409
+        else if (exception is HttpRequestException) code = HttpStatusCode.Forbidden; // 400
     
         var result = JsonSerializer.Serialize(new 
         {
