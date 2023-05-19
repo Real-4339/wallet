@@ -2,8 +2,11 @@
 @token=eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YTYwM2E5My1hYzU2LTQxMzYtYTU4YS0zZjU1ZWVhZDRhNTgiLCJnaXZlbl9uYW1lIjoiSm9obiIsImZhbWlseV9uYW1lIjoiRG9lIiwianRpIjoiYTZmN2YyMmItM2JjYy00Y2U1LWEzYzktZjc5ZmM3YjRhNmZlIiwiZXhwIjoxNjg1Mjk2NzUxLCJpc3MiOiJHcmVlblR1YmUiLCJhdWQiOiJHcmVlblR1YmUifQ.VRQ0G926c8NiBDeYTbOjQBVQhH2pDBdNLoOpzIER1wo
 @userId=950da7ee-e311-497b-9275-6dd958da192c
 
-GET {{host}}/users/{{userId}}/wallet/balance
+POST {{host}}/transactions/credit/{{userId}}
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
-{}
+{
+    "type": "deposit",
+    "amount": 100
+}
