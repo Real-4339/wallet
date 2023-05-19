@@ -1,0 +1,9 @@
+@host=http://localhost:5218
+@token=eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YTYwM2E5My1hYzU2LTQxMzYtYTU4YS0zZjU1ZWVhZDRhNTgiLCJnaXZlbl9uYW1lIjoiSm9obiIsImZhbWlseV9uYW1lIjoiRG9lIiwianRpIjoiYTZmN2YyMmItM2JjYy00Y2U1LWEzYzktZjc5ZmM3YjRhNmZlIiwiZXhwIjoxNjg1Mjk2NzUxLCJpc3MiOiJHcmVlblR1YmUiLCJhdWQiOiJHcmVlblR1YmUifQ.VRQ0G926c8NiBDeYTbOjQBVQhH2pDBdNLoOpzIER1wo
+@userId=6a603a93-ac56-4136-a58a-3f55eead4a58
+
+POST {{host}}/users/{{userId}}/wallet
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{}
