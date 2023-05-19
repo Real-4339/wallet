@@ -10,12 +10,12 @@ using MediatR;
 namespace Api.Controllers;
 
 [Route("users/{userId}/wallet")]
-public class WalletController : ApiController
+public class UserController : ApiController
 {   
     private readonly ISender _mediator;
     private readonly IMapper _mapper;
 
-    public WalletController(
+    public UserController(
         ISender mediator,
         IMapper mapper)
     {
@@ -45,4 +45,7 @@ public class WalletController : ApiController
 
         return Ok(_mapper.Map<GetBalanceResponse>(walletResult));
     }
+
+    // [HttpGet]
+    // [Route("transactions")]
 }
