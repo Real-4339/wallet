@@ -4,7 +4,7 @@ namespace Domain.UserAggregate.ValueObjects;
 
 public sealed class UserId : ValueObject
 {   
-    public Guid Value { get; }
+    public Guid Value { get; } = default!;
 
     private UserId(Guid value)
     {
