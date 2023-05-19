@@ -1,5 +1,5 @@
-using Application.Auth.Results;
-using Dtos.Authentication;
+using Application.Common.Results;
+using Dtos.User;
 using Mapster;
 
 namespace Api.Mapping;
@@ -8,7 +8,7 @@ public class WalletConf : IRegister
 {
     public void Register(TypeAdapterConfig config)
     {   
-        config.NewConfig<AuthRegResult, RegisterResponse>()
+        config.NewConfig<StatusResult, RegisterWalletResponse>()
             .Map(dest => dest, src => src);
     }
 }
