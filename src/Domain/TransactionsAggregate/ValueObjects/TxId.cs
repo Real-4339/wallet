@@ -1,6 +1,6 @@
 using Domain.Common.Primitives;
 
-namespace Domain.Transactions.ValueObjects;
+namespace Domain.TransactionsAggregate.ValueObjects;
 
 public sealed class TxId : ValueObject
 {
