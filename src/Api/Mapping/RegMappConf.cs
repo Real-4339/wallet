@@ -9,7 +9,9 @@ public class RegMappConf : IRegister
     public void Register(TypeAdapterConfig config)
     {   
         config.NewConfig<AuthRegResult, RegisterResponse>()
+            .Map(dest => dest.Id, src => src.User.Id.Value)
             .Map(dest => dest, src => src.User);
+
     }
 }
 
