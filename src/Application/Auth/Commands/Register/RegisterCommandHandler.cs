@@ -31,15 +31,13 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, AuthRegRe
         }
 
         // Create a new user
-        var user = new User
-        {
-            Id = Guid.NewGuid(),
-            firstName = command.FirstName,
-            lastName = command.LastName,
-            Email = command.Email,
-            Username = command.Username,
-            Password = command.Password
-        };
+        var user = User.Create(
+            command.FirstName,
+            command.LastName,
+            command.Email,
+            command.Username,
+            command.Password
+        );
         
         _authRepository.AddUser(user);
 
