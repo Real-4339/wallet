@@ -1,7 +1,7 @@
 using Domain.Common.Primitives;
-using Domain.User.ValueObjects;
+using Domain.UserAggregate.ValueObjects;
 
-namespace Domain.User;
+namespace Domain.UserAggregate;
 
 public class User // : AggregateRoot<UserId>
 {

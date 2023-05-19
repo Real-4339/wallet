@@ -1,5 +1,5 @@
 using Domain.Transactions.ValueObjects;
-using Domain.User.ValueObjects;
+using Domain.UserAggregate.ValueObjects;
 using Domain.Common.Primitives;
 
 namespace Domain.Transactions;

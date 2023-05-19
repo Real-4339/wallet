@@ -1,6 +1,6 @@
 using Domain.Common.Primitives;
 
-namespace Domain.User.ValueObjects;
+namespace Domain.UserAggregate.ValueObjects;
 
 public sealed class UserWalletId : ValueObject
 {

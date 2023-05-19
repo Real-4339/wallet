@@ -1,8 +1,8 @@
 using Domain.Transactions.ValueObjects;
 using Domain.Common.Primitives;
-using Domain.User.ValueObjects;
+using Domain.UserAggregate.ValueObjects;
 
-namespace Domain.User.Entities;
+namespace Domain.UserAggregate.Entities;
 
 public sealed class UserWallet : Entity<UserWalletId>
 {   

@@ -4,8 +4,9 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Options;
 using System.Security.Claims;
+using Domain.UserAggregate;
 using System.Text;
-using Domain.User;
+
 
 namespace Infrastructure.Auth;
 

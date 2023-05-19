@@ -1,3 +1,3 @@
-namespace Dtos.User;
+namespace Dtos.User.Wallet;
 
 public record RegisterWalletRequest();
