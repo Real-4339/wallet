@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Dtos.User.Balance;
 using Dtos.User.Wallet;
 using MapsterMapper;
-using MediatR;
 using Dtos.User;
+using MediatR;
 
 namespace Api.Controllers;
 
