@@ -11,13 +11,13 @@
     - [Register Wallet](#register-wallet)  
         - [Request](#request-2)  
         - [Response](#response-2)  
-    - [Get Players Balance](#get-players-balance)  
+    - [Get User's Balance](#get-users-balance)  
         - [Request](#request-3)  
         - [Response](#response-3)  
-    - [Credit Transaction to Player's Wallet](#credit-transaction-to-players-wallet)  
+    - [Credit Transaction to User's Wallet](#credit-transaction-to-users-wallet)  
         - [Request](#request-4)  
         - [Response](#response-4)  
-    - [Get Player's Transactions](#get-players-transactions)  
+    - [Get User's Transactions](#get-users-transactions)  
         - [Request](#request-5)  
         - [Response](#response-5)  
 
@@ -123,19 +123,14 @@ Content-Type: application/json
 
 ## Register Wallet
 
-Registers a new wallet for a player.
+Registers a new wallet for a user.
 
 ### Request
 
 ```js
-POST /wallet/register
+POST /user/{userId}/wallet
 Content-Type: application/json
-```
-
-```json
-{   
-    "playerId": "d89f4a1e-9c5b-4e4a-8c0e-0e8a5a1a1a1a"
-}
+Authorization: Bearer {{token}}
 ```
 
 ### Response
@@ -166,14 +161,14 @@ Content-Type: application/json
 }
 ```
 
-## Get Players Balance
+## Get Users Balance
 
-Gets the balance of a player.
+Gets the balance of a user.
 
 ### Request
 
 ```js
-GET /wallet/:player_id
+GET /user/{userId}/wallet/balance
 Authorization: Bearer {{token}}
 ```
 
@@ -187,26 +182,25 @@ Content-Type: application/json
 
 ```json
 {   
-    "playerId": "d89f4a1e-9c5b-4e4a-8c0e-0e8a5a1a1a1a",
+    "userId": "d89f4a1e-9c5b-4e4a-8c0e-0e8a5a1a1a1a",
     "balance": 100
 }
 ```
 
-## Credit Transaction to Player's Wallet
+## Credit Transaction to User's Wallet
 
-Credits a transaction to a player's wallet.
+Credits a transaction to a user's wallet.
 
 ### Request
 
 ```js
-POST /transactions/credit
+POST /transactions/credit/{userId}
 Content-Type: application/json
 Authorization: Bearer {{token}}
 ```
 
 ```json
 {   
-    "playerId": "d89f4a1e-9c5b-4e4a-8c0e-0e8a5a1a1a1a",
     "transactionType": "deposit",
     "amount": 100
 }
@@ -222,7 +216,7 @@ Content-Type: application/json
 
 ```json
 {   
-    "playerId": "d89f4a1e-9c5b-4e4a-8c0e-0e8a5a1a1a1a",
+    "userId": "d89f4a1e-9c5b-4e4a-8c0e-0e8a5a1a1a1a",
     "transactionId": "transaction-guid",
     "transactionIype": "deposit",
     "amount": 100,
@@ -245,14 +239,14 @@ Content-Type: application/json
 }
 ```
 
-## Get Player's Transactions
+## Get User's Transactions
 
-Retrieves a list of saved transactions for a given player, with optional filtering by transaction type.
+Retrieves a list of saved transactions for a given user, with optional filtering by transaction type.
 
 ### Request
 
 ```js
-GET /transaction/{player_id}?types=deposit,stake
+GET /user/{userId}/wallet/transactions?transactionType={transactionType}
 Authorization: Bearer {{token}}
 ```
 
@@ -266,17 +260,17 @@ Content-Type: application/json
 
 ```json
 {   
-    "player_id": "d89f4a1e-9c5b-4e4a-8c0e-0e8a5a1a1a1a",
+    "userId": "d89f4a1e-9c5b-4e4a-8c0e-0e8a5a1a1a1a",
     "transactions": [
         {
-            "transaction_id": "transaction-guid1",
-            "transaction_type": "deposit",
+            "transactionId": "transaction-guid1",
+            "transactionType": "deposit",
             "amount": 100,
             "state": "completed"
         },
         {
-            "transaction_id": "transaction-guid2",
-            "transaction_type": "stake",
+            "transactionId": "transaction-guid2",
+            "transactionType": "stake",
             "amount": 50,
             "state": "completed"
         }
