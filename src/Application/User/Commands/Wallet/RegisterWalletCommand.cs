@@ -1,8 +1,6 @@
+using Application.Common.Results;
+using MediatR;
+
 namespace Application.UserAggregate.Commands.Wallet;
 
-public record RegisterWalletCommand(
-    string Name,
-    string Description,
-    string Currency,
-    string UserId
-);
+public record RegisterWalletCommand() : IRequest<StatusResult> ;
