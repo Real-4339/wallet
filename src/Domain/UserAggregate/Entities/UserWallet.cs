@@ -20,9 +20,10 @@ public sealed class UserWallet : Entity<UserWalletId>
     public IReadOnlyList<TxId> TransactionIds => _transactionIds.ToList();
 
     public static UserWallet Create(
-        UserWalletId id,
         decimal balance) =>
-        new(id, balance);
+        new(
+            UserWalletId.New(),
+            balance);
 
     public void AddTransaction(TxId txId){
         _transactionIds.Add(txId);
