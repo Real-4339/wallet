@@ -1,9 +1,9 @@
+using Domain.TransactionsAggregate.ValueObjects;
 using Domain.TransactionsAggregate.Enums;
 using Domain.UserAggregate.ValueObjects;
-using Domain.Transactions.ValueObjects;
 using Domain.Common.Primitives;
 
-namespace Domain.Transactions;
+namespace Domain.TransactionsAggregate;
 
 public sealed class Tx : AggregateRoot<TxId>
 {
