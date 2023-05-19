@@ -1,6 +1,7 @@
-using Domain.Transactions.ValueObjects;
-using Domain.Common.Primitives;
+using Domain.TransactionsAggregate.ValueObjects;
+using Domain.TransactionsAggregate.Enums;
 using Domain.UserAggregate.ValueObjects;
+using Domain.Common.Primitives;
 
 namespace Domain.UserAggregate.Entities;
 
@@ -29,24 +30,21 @@ public sealed class UserWallet : Entity<UserWalletId>
         _transactionIds.Add(txId);
     }
 
-    public void UpdateBalance(decimal amount, string type){
+    public void UpdateBalance(decimal amount, TransactionType type){
         if (amount < 0){
             throw new Exception("Amount cannot be negative");
         }
-        if(type == "deposit"){
+        if(type == TransactionType.Deposit){
             Balance += amount;
         }
-        else if(type == "stake"){
+        else if(type == TransactionType.Stake){
             if (amount > Balance){
                 throw new Exception("Insufficient funds");
             }
             Balance -= amount;
         }
-        else if(type == "win"){
+        else if(type == TransactionType.Win){
             Balance += amount;
-        }
-        else if(type == "lose"){
-            Balance -= amount;
         }
         else{
             throw new Exception("Invalid transaction type");
