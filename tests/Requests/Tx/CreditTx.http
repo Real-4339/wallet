@@ -7,7 +7,6 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {   
-    "userId" : "{{userId}}",
     "type": "deposit",
     "amount": 100
 }
