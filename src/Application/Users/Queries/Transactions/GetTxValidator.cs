@@ -11,8 +11,8 @@ public class GetTxValidator : AbstractValidator<GetTxQuery>
             .ForEach(tx =>
             {
                 tx.NotEmpty().WithMessage("Transaction is required");
-                tx.Must(x => x == "win" || x == "stake" || x == "credit")
-                    .WithMessage("Transaction must be win, stake, or credit");
+                tx.Must(x => x == "win" || x == "stake" || x == "deposit")
+                    .WithMessage("Transaction must be win, stake, or deposit");
             });
     }
 }
