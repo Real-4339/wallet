@@ -198,9 +198,12 @@ POST /transactions/credit/{userId}
 Content-Type: application/json
 Authorization: Bearer {{token}}
 ```
+> Note: The transaction type can be `deposit`, `stake` or `win`.  
+  Transaction-guid is optional
 
 ```json
 {   
+    "Id": "transaction-guid",
     "transactionType": "deposit",
     "amount": 100
 }
