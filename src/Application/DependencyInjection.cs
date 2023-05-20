@@ -1,6 +1,9 @@
 using Microsoft.Extensions.DependencyInjection;
+using Application.Users.Commands.Transactions;
+using Application.Users.Queries.Transactions;
 using Application.Auth.Commands.Register;
 using Application.Auth.Behaviors;
+using Application.Common.Results;
 using Application.Auth.Results;
 using System.Reflection;
 using FluentValidation;
@@ -18,6 +21,14 @@ public static class DependencyInjection
         services.AddScoped<
             IPipelineBehavior<RegisterCommand, AuthRegResult>,
             RegisterValidationCommandBehaviour>();
+        
+        services.AddScoped<
+            IPipelineBehavior<CreditTxCommand, StatusResult>,
+            TransactionBehavior>();
+
+        services.AddScoped<
+            IPipelineBehavior<GetTxQuery, GetTxResult>,
+            GetTxBehavior>();
 
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
