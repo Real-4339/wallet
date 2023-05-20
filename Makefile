@@ -1,4 +1,3 @@
-
 # Targets
 clean:
 	@echo "Cleaning up..."
@@ -18,7 +17,5 @@ run:
 
 tests: 
 	@echo "Running tests..."
-	@dotnet test src/Tests/
+	@dotnet test tests/Tests/
 	@echo "Tests ran!"
-
-net: run
