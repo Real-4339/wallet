@@ -41,10 +41,11 @@ public class GetTxQueryHandler : IRequestHandler<GetTxQuery, GetTxResult>
             types
         );
 
-        return new GetTxResult
-        {
-            UserId = user.Id.Value,
-            Transactions = transactions
-        };
+        var serializedTransactions = transactions
+                .Select(t => t.Serialize()).ToList();
+
+        return new GetTxResult(
+            user.Id.Value,
+            serializedTransactions);
     }
 }
