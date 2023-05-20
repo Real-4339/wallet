@@ -15,6 +15,6 @@ make run
 ## Tests
 
 ```make
-make tests
+make tests -B
 ```
 
