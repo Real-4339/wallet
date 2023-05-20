@@ -1,4 +1,5 @@
 using Application.Common.Interfaces.Persistence;
+using Domain.TransactionsAggregate.ValueObjects;
 using Domain.TransactionsAggregate.Enums;
 using Domain.TransactionsAggregate;
 using Application.Common.Results;
@@ -26,26 +27,54 @@ public class CreditTxCommandHandler : IRequestHandler<CreditTxCommand, StatusRes
 
     public async Task<StatusResult> Handle(CreditTxCommand request, CancellationToken cancellationToken)
     {      
+
+        // Check if user exists
+        if (_userRepository.GetUserById(request.UserId) is not User user)
+        {
+            throw new HttpRequestException("Sowwy");
+        }
+        
+        Tx? transac = default!;
+
+        if (request.TxId != Guid.Empty)
+        {   
+            transac = _transactionRepository.GetById(request.TxId);
+            // Check if transaction exists
+            if (transac is Tx)
+            {
+                return new StatusResult(transac.State.ToString());
+            }
+        }
+        
+        // Generate transaction type and state
+        var tx_type = (TransactionType)Enum.Parse(typeof(TransactionType), request.Type, true);
+        var tx_state = (TransactionState)Enum.Parse(typeof(TransactionState), "accepted", true);
+        
+        Tx tx = default!;
+
+        if (request.TxId != Guid.Empty)
+        {
+
+            TxId txId = TxId.From(request.TxId);
+
+            tx = Tx.Create(
+            user.Id,
+            txId,
+            request.Amount,
+            tx_type,
+            tx_state);
+        }
+        else {
+            tx = Tx.Create(
+            user.Id,
+            request.Amount,
+            tx_type,
+            tx_state);
+        }
+
         await _semaphore.WaitAsync(cancellationToken);
 
         try {
-            // Check if user exists
-            if (_userRepository.GetUserById(request.UserId) is not User user)
-            {
-                throw new HttpRequestException("Sowwy");
-            }
-            
-            // Generate transaction type and state
-            var tx_type = (TransactionType)Enum.Parse(typeof(TransactionType), request.Type, true);
-            var tx_state = (TransactionState)Enum.Parse(typeof(TransactionState), "accepted", true);
-            
-            var tx = Tx.Create(
-                user.Id,
-                request.Amount,
-                tx_type,
-                tx_state
-            );
-
             // Add transaction to transaction repo
             _transactionRepository.AddTx(tx);
 
