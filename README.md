@@ -45,7 +45,13 @@ To run the Player Wallet Service locally, follow these steps:
 
 1. Clone the repository: `git clone https://github.com/Real-4339/wallet.git`
 
-2. You dont need to navigate to the project folder, you can run the following commands from start directory.
+2. Navigate to the project directory: `cd wallet`
+
+3. All commands are run using the `make` utility. To see a list of available commands, run `make help`.
+
+4. To run the service, run `make run`. The service will be available at `http://localhost:5218`.
+
+5. To run the tests, run `make tests`.
 
 ### Build
 
