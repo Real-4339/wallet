@@ -25,12 +25,13 @@ public class TxController : ApiController
         CreditRequest request,
         Guid userId)
     {   
-
+        Guid TxId = new Guid(request.TxId);
         var command = new CreditTxCommand(
             userId,
+            TxId,
             request.Type,
             request.Amount);
-
+        
         var txResult = await _mediator.Send(command);
 
         return Ok(_mapper.Map<CreditResponse>(txResult));
