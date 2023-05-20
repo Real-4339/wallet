@@ -9,7 +9,7 @@ public class CreditTxValidator : AbstractValidator<CreditTxCommand>
         // Only takes win, stake, credit.
         RuleFor(x => x.Type)
             .NotEmpty().WithMessage("Transaction is required")
-            .Must(x => x == "win" || x == "stake" || x == "credit")
-                    .WithMessage("Transaction must be win, stake, or credit");
+            .Must(x => x == "win" || x == "stake" || x == "deposit")
+                    .WithMessage("Transaction must be win, stake, or deposit");
     }
 }
