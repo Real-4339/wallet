@@ -1,12 +1,13 @@
 @host=http://localhost:5218
 @token=eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YTYwM2E5My1hYzU2LTQxMzYtYTU4YS0zZjU1ZWVhZDRhNTgiLCJnaXZlbl9uYW1lIjoiSm9obiIsImZhbWlseV9uYW1lIjoiRG9lIiwianRpIjoiYTZmN2YyMmItM2JjYy00Y2U1LWEzYzktZjc5ZmM3YjRhNmZlIiwiZXhwIjoxNjg1Mjk2NzUxLCJpc3MiOiJHcmVlblR1YmUiLCJhdWQiOiJHcmVlblR1YmUifQ.VRQ0G926c8NiBDeYTbOjQBVQhH2pDBdNLoOpzIER1wo
-@userId=b66c6099-e5cb-42a7-a86c-d97a40f76330
+@userId=f3cd0b78-8981-49af-b43d-018a23d4e4e1
 
 POST {{host}}/transactions/credit/{{userId}}
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {   
+    "TxId": "9999c9f9-9f99-99e9-b99c-b99cb99f9b99",
     "type": "deposit",
     "amount": 100
 }
