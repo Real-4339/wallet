@@ -259,16 +259,16 @@ Content-Type: application/json
     "userId": "d89f4a1e-9c5b-4e4a-8c0e-0e8a5a1a1a1a",
     "transactions": [
         {
-            "transactionId": "transaction-guid1",
-            "transactionType": "deposit",
+            "Id": "transaction-guid1",
             "amount": 100,
-            "state": "completed"
+            "transactionType": "deposit",
+            "transactionState": "completed"
         },
         {
-            "transactionId": "transaction-guid2",
-            "transactionType": "stake",
+            "Id": "transaction-guid2",
             "amount": 50,
-            "state": "completed"
+            "transactionType": "stake",
+            "transactionState": "completed"
         }
     ]
 }
