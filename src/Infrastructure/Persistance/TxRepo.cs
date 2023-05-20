@@ -1,4 +1,5 @@
 using Application.Common.Interfaces.Persistence;
+using Domain.TransactionsAggregate.Enums;
 using Domain.TransactionsAggregate;
 
 namespace Infrastucture.Persistence;
@@ -19,5 +20,13 @@ public class TxRepo : ITxRepo
     public List<Tx> GetTxByUserId(Guid userId)
     {
         return _transactions.Where(t => t.UserId.Value == userId).ToList();
+    }
+
+    public List<Tx> GetTxByUserId(Guid userId, List<TransactionType> types)
+    {
+        return _transactions
+            .Where(t => t.UserId.Value == userId)
+            .Where(t => types.Contains(t.Type))
+            .ToList();
     }
 }
