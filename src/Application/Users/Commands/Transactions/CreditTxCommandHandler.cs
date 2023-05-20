@@ -12,41 +12,57 @@ public class CreditTxCommandHandler : IRequestHandler<CreditTxCommand, StatusRes
     private readonly ITxRepo _transactionRepository;
     private readonly IUserRepo _userRepository;
 
+    private readonly ISemaphoreRepo _semaphore;
+
     public CreditTxCommandHandler(
         ITxRepo transactionRepository,
-        IUserRepo userRepository)
+        IUserRepo userRepository,
+        ISemaphoreRepo semaphore)
     {
         _transactionRepository = transactionRepository;
         _userRepository = userRepository;
+        _semaphore = semaphore;
     }
 
     public async Task<StatusResult> Handle(CreditTxCommand request, CancellationToken cancellationToken)
     {      
-        await Task.CompletedTask;
+        await _semaphore.WaitAsync(cancellationToken);
 
-        // Check if user exists
-        if (_userRepository.GetUserById(request.UserId) is not User user)
-        {
-            throw new HttpRequestException("Sowwy");
+        try {
+            // Check if user exists
+            if (_userRepository.GetUserById(request.UserId) is not User user)
+            {
+                throw new HttpRequestException("Sowwy");
+            }
+            
+            // Generate transaction type and state
+            var tx_type = (TransactionType)Enum.Parse(typeof(TransactionType), request.Type, true);
+            var tx_state = (TransactionState)Enum.Parse(typeof(TransactionState), "accepted", true);
+            
+            var tx = Tx.Create(
+                user.Id,
+                request.Amount,
+                tx_type,
+                tx_state
+            );
+
+            // Add transaction to transaction repo
+            _transactionRepository.AddTx(tx);
+
+            // Add transaction to user wallet
+            var res = user.AddTransaction(tx.Id, tx.Amount, tx.Type);
+
+            if (!res)
+            {
+                tx.UpdateState(TransactionState.Rejected);
+                return new StatusResult("rejected");
+            }
+
+            return new StatusResult("accepted");
         }
-        
-        // Generate transaction type and state
-        var tx_type = (TransactionType)Enum.Parse(typeof(TransactionType), request.Type, true);
-        var tx_state = (TransactionState)Enum.Parse(typeof(TransactionState), "accepted", true);
-        
-        var tx = Tx.Create(
-            user.Id,
-            request.Amount,
-            tx_type,
-            tx_state
-        );
-
-        // Add transaction to transaction repo
-        _transactionRepository.AddTx(tx);
-
-        // Add transaction to user wallet
-        user.AddTransaction(tx.Id, tx.Amount, tx.Type);
-
-        return new StatusResult("accepted");
+        finally
+        {
+            _semaphore.semaphore.Release();
+        }
     }
 }
