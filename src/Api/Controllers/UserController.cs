@@ -50,13 +50,18 @@ public class UserController : ApiController
 
     [HttpGet]
     [Route("transactions")]
-    public async Task<IActionResult> Get(
-        GetTxRequest request,
-        Guid userId)
+    public async Task<IActionResult> GetTransactions(
+        [FromRoute] Guid userId,
+        [FromQuery] GetTxRequest request)
     {   
+        List<string> txTypes = request?.TxTypes?
+            .Split(',')
+            .Select(txType => txType.Trim())
+            .ToList() ?? new List<string>();
+
         var query = new GetTxQuery(
             userId,
-            request.TxTypes
+            txTypes
         );
         var txResult = await _mediator.Send(query);
 
