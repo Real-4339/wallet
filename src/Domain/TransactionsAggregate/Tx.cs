@@ -2,6 +2,7 @@ using Domain.TransactionsAggregate.ValueObjects;
 using Domain.TransactionsAggregate.Enums;
 using Domain.UserAggregate.ValueObjects;
 using Domain.Common.Primitives;
+using System.Text.Json;
 
 namespace Domain.TransactionsAggregate;
 
@@ -32,5 +33,8 @@ public sealed class Tx : AggregateRoot<TxId>
         TransactionType type,
         TransactionState state) =>
         new(TxId.New(), userId, amount, type, state);
+
+    public string Serialize() =>
+        JsonSerializer.Serialize(this);
 }
     
