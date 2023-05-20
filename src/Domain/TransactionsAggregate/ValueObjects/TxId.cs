@@ -13,6 +13,8 @@ public sealed class TxId : ValueObject
 
     public static TxId New() => new(Guid.NewGuid());
 
+    public static TxId From(Guid value) => new(value);
+
     protected override IEnumerable<object> GetEqualityComponents()
     {
         yield return Value;
