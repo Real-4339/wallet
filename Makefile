@@ -19,3 +19,12 @@ tests:
 	@echo "Running tests..."
 	@dotnet test tests/Tests/
 	@echo "Tests ran!"
+
+help:
+	@echo "Usage: make [target]"
+	@echo "Targets:"
+	@echo "  clean - Clean up the project"
+	@echo "  build - Build the project"
+	@echo "  run - Run the project"
+	@echo "  tests - Run the tests"
+	@echo "  help - Show this help message"
