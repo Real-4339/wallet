@@ -22,6 +22,7 @@ public static class DependencyInjection
         services.AddScoped<IDateTimeProvider, DateTimeProvider>(); 
         services.AddSingleton<IUserRepo, UserRepo>();
         services.AddSingleton<ITxRepo, TxRepo>();
+        services.AddSingleton<ISemaphoreRepo, SemaphoreRepo>();
 
         return services;
     }
