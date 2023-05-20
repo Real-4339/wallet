@@ -1,6 +1,8 @@
+using Application.Users.Queries.Transactions;
 using Application.Users.Commands.Wallet;
 using Application.Users.Queries.Balance;
 using Microsoft.AspNetCore.Mvc;
+using Dtos.User.Transactions;
 using Dtos.User.Balance;
 using Dtos.User.Wallet;
 using MapsterMapper;
@@ -46,6 +48,18 @@ public class UserController : ApiController
         return Ok(_mapper.Map<GetBalanceResponse>(walletResult));
     }
 
-    // [HttpGet]
-    // [Route("transactions")]
+    [HttpGet]
+    [Route("transactions")]
+    public async Task<IActionResult> Get(
+        GetTxRequest request,
+        Guid userId)
+    {   
+        var query = new GetTxQuery(
+            userId,
+            request.TxTypes
+        );
+        var txResult = await _mediator.Send(query);
+
+        return Ok(_mapper.Map<GetTxResponse>(txResult));
+    }
 }
