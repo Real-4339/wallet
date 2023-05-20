@@ -30,24 +30,27 @@ public sealed class UserWallet : Entity<UserWalletId>
         _transactionIds.Add(txId);
     }
 
-    public void UpdateBalance(decimal amount, TransactionType type){
+    public bool UpdateBalance(decimal amount, TransactionType type){
         if (amount < 0){
-            throw new Exception("Amount cannot be negative");
+            return false;
         }
         if(type == TransactionType.Deposit){
             Balance += amount;
+            return true;
         }
         else if(type == TransactionType.Stake){
             if (amount > Balance){
-                throw new Exception("Insufficient funds");
+                return false;
             }
             Balance -= amount;
+            return true;
         }
         else if(type == TransactionType.Win){
             Balance += amount;
+            return true;
         }
         else{
-            throw new Exception("Invalid transaction type");
+            return false;
         }
     }
     
