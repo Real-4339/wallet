@@ -9,9 +9,9 @@ namespace Domain.TransactionsAggregate;
 
 public sealed class Tx : AggregateRoot<TxId>
 {
-    public UserId UserId { get; private set; }
-    public decimal Amount { get; private set; }
-    public TransactionType Type { get; private set; }
+    public UserId UserId { get; init; }
+    public decimal Amount { get; init; }
+    public TransactionType Type { get; init; }
     public TransactionState State { get; private set; }
     
     private Tx(
