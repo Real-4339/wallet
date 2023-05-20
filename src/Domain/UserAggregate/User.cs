@@ -59,12 +59,13 @@ public sealed class User : AggregateRoot<UserId>
         return Wallet.GetBalance();
     }
 
-    public void AddTransaction(TxId txId, decimal amount, TransactionType type){
+    public bool AddTransaction(TxId txId, decimal amount, TransactionType type){
         if (Wallet == null){
             throw new Exception("User does not have a wallet");
         }
         Wallet.AddTransaction(txId);
-        Wallet.UpdateBalance(amount, type);
+        var res = Wallet.UpdateBalance(amount, type);
+        return res;
     }
 
 }
