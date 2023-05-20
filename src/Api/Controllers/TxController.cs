@@ -25,7 +25,10 @@ public class TxController : ApiController
         CreditRequest request,
         Guid userId)
     {   
-        Guid TxId = new Guid(request.TxId);
+        
+        Guid TxId = string.IsNullOrEmpty(request.TxId) 
+            ? Guid.Empty : new Guid(request.TxId);
+
         var command = new CreditTxCommand(
             userId,
             TxId,
