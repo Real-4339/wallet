@@ -1,6 +1,7 @@
 using Domain.TransactionsAggregate.ValueObjects;
 using Domain.TransactionsAggregate.Enums;
 using Domain.UserAggregate.ValueObjects;
+using System.Text.Json.Serialization;
 using Domain.Common.Primitives;
 using System.Text.Json;
 
@@ -34,7 +35,13 @@ public sealed class Tx : AggregateRoot<TxId>
         TransactionState state) =>
         new(TxId.New(), userId, amount, type, state);
 
-    public string Serialize() =>
-        JsonSerializer.Serialize(this);
+    public string Serialize(){
+        var options = new JsonSerializerOptions
+        {
+            Converters = { new JsonStringEnumConverter() }
+        };
+
+        return JsonSerializer.Serialize(this, options);
+    }
 }
     
