@@ -35,6 +35,10 @@ public sealed class Tx : AggregateRoot<TxId>
         TransactionState state) =>
         new(TxId.New(), userId, amount, type, state);
 
+    public void UpdateState(TransactionState state){
+        State = state;
+    }
+
     public string Serialize(){
         var options = new JsonSerializerOptions
         {
