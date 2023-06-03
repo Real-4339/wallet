@@ -28,7 +28,7 @@ public class JwtTokenGen : IJwtTokenGenerator
             SecurityAlgorithms.HmacSha256Signature);
 
         var claims = new []{
-            new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+            new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()!),
             new Claim(JwtRegisteredClaimNames.GivenName, user.firstName),
             new Claim(JwtRegisteredClaimNames.FamilyName, user.lastName),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
