@@ -89,7 +89,7 @@ Content-Type: application/json
 ```json
 {   
     "username": "username",
-    "password": "password-hash"
+    "password": "password"
 }
 ```
 
