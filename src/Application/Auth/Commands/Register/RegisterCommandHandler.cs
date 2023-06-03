@@ -1,5 +1,6 @@
 using Application.Common.Interfaces.Persistence;
 using Application.Common.Interfaces.Auth;
+using Microsoft.AspNetCore.Identity;
 using Application.Auth.Results;
 using Domain.UserAggregate;
 using MediatR;
@@ -30,13 +31,17 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, AuthRegRe
             throw new Exception("Internal Server Error");
         }
 
+        // Change password to hash
+        var passwordHasher = new PasswordHasher<string>();
+        var HashedPass = passwordHasher.HashPassword(command.Username, command.Password);
+
         // Create a new user
         var user = User.Create(
             command.FirstName,
             command.LastName,
             command.Email,
             command.Username,
-            command.Password
+            HashedPass
         );
         
         _authRepository.AddUser(user);
