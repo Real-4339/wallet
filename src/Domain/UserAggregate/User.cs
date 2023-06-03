@@ -45,6 +45,20 @@ public sealed class User : AggregateRoot<UserId>
             username,
             password);
         
+    public void Update(
+        string? firstname = null, 
+        string? lastname = null, 
+        string? email = null, 
+        string? username = null, 
+        string? password = null)
+    {
+        firstName = firstname ?? firstName;
+        lastName = lastname ?? lastName;
+        Email = email ?? Email;
+        Username = username ?? Username;
+        Password = password ?? Password;
+    }
+    
     public void RegisterWallet(decimal balance){
         if (Wallet != null){
             throw new Exception("User already has a wallet");

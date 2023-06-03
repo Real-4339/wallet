@@ -16,6 +16,12 @@ public class UserRepo : IUserRepo
     {
         return _users.SingleOrDefault(u => u.Username == username);
     }
+    // new
+    public void UpdateUser(User user)
+    {
+        var index = _users.FindIndex(u => u.Id.Value == user.Id.Value);
+        _users[index] = user;
+    }
 
     public void AddUser(User user)
     {

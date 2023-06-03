@@ -12,17 +12,16 @@ public class CreditTxCommandHandler : IRequestHandler<CreditTxCommand, StatusRes
 {
     private readonly ITxRepo _transactionRepository;
     private readonly IUserRepo _userRepository;
-
     private readonly ISemaphoreRepo _semaphore;
 
     public CreditTxCommandHandler(
         ITxRepo transactionRepository,
         IUserRepo userRepository,
-        ISemaphoreRepo semaphore)
+        ISemaphoreRepo TxSemaphore)
     {
         _transactionRepository = transactionRepository;
         _userRepository = userRepository;
-        _semaphore = semaphore;
+        _semaphore = TxSemaphore;
     }
 
     public async Task<StatusResult> Handle(CreditTxCommand request, CancellationToken cancellationToken)
@@ -72,7 +71,7 @@ public class CreditTxCommandHandler : IRequestHandler<CreditTxCommand, StatusRes
             tx_state);
         }
 
-        await _semaphore.WaitAsync(cancellationToken);
+        await _semaphore.TxWaitAsync(cancellationToken);
 
         try {
             // Add transaction to transaction repo
@@ -91,7 +90,7 @@ public class CreditTxCommandHandler : IRequestHandler<CreditTxCommand, StatusRes
         }
         finally
         {
-            _semaphore.semaphore.Release();
+            _semaphore.TxSemaphore.Release();
         }
     }
 }

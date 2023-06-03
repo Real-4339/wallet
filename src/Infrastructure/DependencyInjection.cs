@@ -23,7 +23,7 @@ public static class DependencyInjection
         services.AddSingleton<IUserRepo, UserRepo>();
         services.AddSingleton<ITxRepo, TxRepo>();
         services.AddSingleton<ISemaphoreRepo, SemaphoreRepo>();
-
+        
         return services;
     }
 
