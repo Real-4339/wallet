@@ -2,11 +2,11 @@ namespace Application.Common.Interfaces.Persistence;
 
 public interface ISemaphoreRepo
 {
-    SemaphoreSlim TxSemaphore { get; }
+    SemaphoreSlim WalletSemaphore { get; }
 
-    SemaphoreSlim LoginSemaphore { get; }
+    SemaphoreSlim UserSemaphore { get; }
+    
+    Task WalletWaitAsync(CancellationToken cancellationToken = default);
 
-    Task TxWaitAsync(CancellationToken cancellationToken = default);
-
-    Task LoginWaitAsync(CancellationToken cancellationToken = default);
+    Task UserWaitAsync(CancellationToken cancellationToken = default);
 }

@@ -4,17 +4,17 @@ namespace Infrastucture.Persistence;
 
 public class SemaphoreRepo : ISemaphoreRepo
 {
-    public SemaphoreSlim TxSemaphore { get; } = new SemaphoreSlim(1, 1);
+    public SemaphoreSlim WalletSemaphore { get; } = new SemaphoreSlim(1, 1);
 
-    public SemaphoreSlim LoginSemaphore { get; } = new SemaphoreSlim(1, 1);
+    public SemaphoreSlim UserSemaphore { get; } = new SemaphoreSlim(1, 1);
 
-    public async Task TxWaitAsync(CancellationToken cancellationToken = default)
+    public async Task WalletWaitAsync(CancellationToken cancellationToken = default)
     {
-        await TxSemaphore.WaitAsync(cancellationToken);
+        await WalletSemaphore.WaitAsync(cancellationToken);
     }
 
-    public async Task LoginWaitAsync(CancellationToken cancellationToken = default)
+    public async Task UserWaitAsync(CancellationToken cancellationToken = default)
     {
-        await LoginSemaphore.WaitAsync(cancellationToken);
+        await UserSemaphore.WaitAsync(cancellationToken);
     }
 }
