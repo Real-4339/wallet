@@ -11,20 +11,23 @@ namespace Application.Auth.Queries.Login;
 public class LoginQueryHandler : IRequestHandler<LoginQuery, StatusResult>
 {
     private readonly IUserRepo _authRepository;
+    private readonly ISemaphoreRepo _semaphore;
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
 
     public LoginQueryHandler(
         IJwtTokenGenerator jwtTokenGenerator,
-        IUserRepo authRepository)
+        IUserRepo authRepository,
+        ISemaphoreRepo semaphore)
     {   
         _authRepository = authRepository;
         _jwtTokenGenerator = jwtTokenGenerator;
+        _semaphore = semaphore;
     }
 
     public async Task<StatusResult> Handle(LoginQuery query, CancellationToken cancellationToken)
     {   
         // Check if user exists
-        User user = _authRepository.GetUserByUsername(query.Username) as User
+        User user = await _authRepository.GetUserByUsernameAsync(query.Username) as User
             ?? throw new UnauthorizedAccessException("Unauthorized");
 
         // Validate password
@@ -53,9 +56,16 @@ public class LoginQueryHandler : IRequestHandler<LoginQuery, StatusResult>
         var HashedPass = passwordHasher.HashPassword(user.Username, password);
 
         // Update user password
-        user.Update(
+        try {
+            await _semaphore.UserWaitAsync();
+            
+            user.Update(
             password: HashedPass
-        );
+            );
+        }
+        finally {
+            _semaphore.UserSemaphore.Release();
+        }
 
         await Task.CompletedTask;
     }
