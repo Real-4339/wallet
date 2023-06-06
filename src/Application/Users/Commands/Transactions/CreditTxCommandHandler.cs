@@ -74,17 +74,12 @@ public class CreditTxCommandHandler : IRequestHandler<CreditTxCommand, StatusRes
         // Add transaction to transaction repo
         await _transactionRepository.AddTxAsync(tx);
 
-        var res = false;
-
         // Add transaction to user wallet
-        try {
-            await _semaphore.WalletWaitAsync();
+        await _semaphore.WalletWaitAsync();
 
-            res = user.AddTransaction(tx.Id, tx.Amount, tx.Type);
-        }
-        finally {
-            _semaphore.WalletSemaphore.Release();
-        }
+        var res = user.AddTransaction(tx.Id, tx.Amount, tx.Type);
+        
+        _semaphore.WalletSemaphore.Release();
 
         if (!res)
         {
