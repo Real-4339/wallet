@@ -5,10 +5,10 @@ namespace Application.Common.Interfaces.Persistence;
 
 public interface ITxRepo
 {
-    void AddTx(Tx transaction);
-    Tx? GetById(Guid id);
-    List<Tx> GetTxByUserId(Guid userId);
-    List<Tx> GetTxByUserId(
+    Task AddTxAsync(Tx transaction);
+    Task<Tx?> GetByIdAsync(Guid id);
+    Task<List<Tx>> GetTxByUserIdAsync(Guid userId);
+    Task<List<Tx>> GetTxByUserIdAsync(
         Guid userId, 
         List<TransactionType> types);
 }

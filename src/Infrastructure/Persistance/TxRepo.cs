@@ -7,26 +7,51 @@ namespace Infrastucture.Persistence;
 public class TxRepo : ITxRepo
 {   
     private readonly List<Tx> _transactions = new();
-    public void AddTx(Tx transaction)
-    {
+
+    private readonly SemaphoreSlim UserRepoSemaphore = new SemaphoreSlim(1, 1);
+    
+    public async Task AddTxAsync(Tx transaction)
+    {   
+        await UserRepoSemaphore.WaitAsync();
         _transactions.Add(transaction);
+        UserRepoSemaphore.Release();
     }
 
-    public Tx? GetById(Guid id)
-    {
-        return _transactions.SingleOrDefault(t => t.Id.Value == id);
+    public async Task<Tx?> GetByIdAsync(Guid id)
+    {   
+        await UserRepoSemaphore.WaitAsync();
+        
+        Tx? a = _transactions.SingleOrDefault(t => t.Id.Value == id);
+        
+        UserRepoSemaphore.Release();
+        
+        return a;
     }
 
-    public List<Tx> GetTxByUserId(Guid userId)
-    {
-        return _transactions.Where(t => t.UserId.Value == userId).ToList();
+    public async Task<List<Tx>> GetTxByUserIdAsync(Guid userId)
+    {   
+        await UserRepoSemaphore.WaitAsync();
+        
+        List<Tx> a = _transactions
+                        .Where(t => t.UserId.Value == userId)
+                        .ToList();
+        
+        UserRepoSemaphore.Release();
+        
+        return a;
     }
 
-    public List<Tx> GetTxByUserId(Guid userId, List<TransactionType> types)
+    public async Task<List<Tx>> GetTxByUserIdAsync(Guid userId, List<TransactionType> types)
     {
-        return _transactions
+        await UserRepoSemaphore.WaitAsync();
+        
+        List<Tx> a = _transactions
             .Where(t => t.UserId.Value == userId)
             .Where(t => types.Contains(t.Type))
             .ToList();
+        
+        UserRepoSemaphore.Release();
+        
+        return a;
     }
 }
