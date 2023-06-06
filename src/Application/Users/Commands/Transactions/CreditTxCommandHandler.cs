@@ -28,7 +28,7 @@ public class CreditTxCommandHandler : IRequestHandler<CreditTxCommand, StatusRes
     {      
 
         // Check if user exists
-        if (_userRepository.GetUserById(request.UserId) is not User user)
+        if (await _userRepository.GetUserByIdAsync(request.UserId) is not User user)
         {
             throw new HttpRequestException("Sowwy");
         }
@@ -37,7 +37,7 @@ public class CreditTxCommandHandler : IRequestHandler<CreditTxCommand, StatusRes
 
         if (request.TxId != Guid.Empty)
         {   
-            transac = _transactionRepository.GetById(request.TxId);
+            transac = await _transactionRepository.GetByIdAsync(request.TxId);
             // Check if transaction exists
             if (transac is Tx)
             {
@@ -71,26 +71,27 @@ public class CreditTxCommandHandler : IRequestHandler<CreditTxCommand, StatusRes
             tx_state);
         }
 
-        await _semaphore.TxWaitAsync(cancellationToken);
+        // Add transaction to transaction repo
+        await _transactionRepository.AddTxAsync(tx);
 
+        var res = false;
+
+        // Add transaction to user wallet
         try {
-            // Add transaction to transaction repo
-            _transactionRepository.AddTx(tx);
+            await _semaphore.WalletWaitAsync();
 
-            // Add transaction to user wallet
-            var res = user.AddTransaction(tx.Id, tx.Amount, tx.Type);
-
-            if (!res)
-            {
-                tx.UpdateState(TransactionState.Rejected);
-                return new StatusResult("rejected");
-            }
-
-            return new StatusResult("accepted");
+            res = user.AddTransaction(tx.Id, tx.Amount, tx.Type);
         }
-        finally
+        finally {
+            _semaphore.WalletSemaphore.Release();
+        }
+
+        if (!res)
         {
-            _semaphore.TxSemaphore.Release();
+            tx.UpdateState(TransactionState.Rejected);
+            return new StatusResult("rejected");
         }
+
+        return new StatusResult("accepted");
     }
 }
