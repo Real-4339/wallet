@@ -1,6 +1,6 @@
 # Player Wallet Service
 
-This project is a .NET Core backend service that exposes an HTTP REST API for managing player wallets. The service allows players to perform transactions and retrieve information about their wallet balance and transaction history.
+This project is a .NET Core backend service that exposes an HTTP REST API for managing player wallets. The service allows players to perform transactions and retrieve information about their wallet balance and transaction history. Authentication and authorization are based on JWT tokens.
 
 ## Functional Requirements
 
@@ -26,7 +26,7 @@ This project is a .NET Core backend service that exposes an HTTP REST API for ma
 
 The service provides the following API endpoints:
 
-- POST /auth/register: Registers a new player. Returns an error if the player is already registered.
+- POST /auth/register: Registers a new playerId, username and a JWT token. Returns an error if the player is already registered.
 
 - POST /auth/login: Logs in a player. Returns an error if the player is not registered or the password is incorrect.
 
@@ -75,6 +75,7 @@ make tests -B
 
 - .NET Core 3.1 or later
 - ASP.NET Core - Framework for building web applications and APIs with .NET Core
+- XUnit - Testing framework for .NET Core applications
 
 ## Contributing
 
