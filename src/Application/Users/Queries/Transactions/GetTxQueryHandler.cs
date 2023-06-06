@@ -22,10 +22,8 @@ public class GetTxQueryHandler : IRequestHandler<GetTxQuery, GetTxResult>
         GetTxQuery request,
         CancellationToken cancellationToken)
     {
-        await Task.CompletedTask;
-
         // Check if user exists
-        if (_userRepository.GetUserById(request.UserId) is not User user)
+        if (await _userRepository.GetUserByIdAsync(request.UserId) is not User user)
         {
             throw new HttpRequestException("Sowwy");
         }
@@ -36,7 +34,7 @@ public class GetTxQueryHandler : IRequestHandler<GetTxQuery, GetTxResult>
             .ToList();
         
         // Get Transactions
-        var transactions = _transactionRepository.GetTxByUserId(
+        var transactions = await _transactionRepository.GetTxByUserIdAsync(
             user.Id.Value,
             types
         );
