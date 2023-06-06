@@ -75,7 +75,7 @@ public sealed class User : AggregateRoot<UserId>
 
     public bool AddTransaction(TxId txId, decimal amount, TransactionType type){
         if (Wallet == null){
-            throw new Exception("User does not have a wallet");
+            return false;
         }
         Wallet.AddTransaction(txId);
         var res = Wallet.UpdateBalance(amount, type);
