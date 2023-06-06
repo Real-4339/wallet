@@ -7,24 +7,36 @@ public class UserRepo : IUserRepo
 {
     private readonly List<User> _users = new();
 
-    public User? GetUserById(Guid id)
-    {
-        return _users.SingleOrDefault(u => u.Id.Value == id);
+    private readonly SemaphoreSlim TxRepoSemaphore = new SemaphoreSlim(1, 1);
+
+    public async Task<User?> GetUserByIdAsync(Guid id)
+    {   
+        await TxRepoSemaphore.WaitAsync();
+        
+        User? a = _users.SingleOrDefault(u => u.Id.Value == id);
+        
+        TxRepoSemaphore.Release();
+
+        return a;
     }
 
-    public User? GetUserByUsername(string username)
+    public async Task<User?> GetUserByUsernameAsync(string username)
     {
-        return _users.SingleOrDefault(u => u.Username == username);
-    }
-    // new
-    public void UpdateUser(User user)
-    {
-        var index = _users.FindIndex(u => u.Id.Value == user.Id.Value);
-        _users[index] = user;
+        await TxRepoSemaphore.WaitAsync();
+        
+        User? a = _users.SingleOrDefault(u => u.Username == username);
+        
+        TxRepoSemaphore.Release();
+        
+        return a;
     }
 
-    public void AddUser(User user)
-    {
+    public async Task AddUserAsync(User user)
+    {   
+        await TxRepoSemaphore.WaitAsync();
+        
         _users.Add(user);
+        
+        TxRepoSemaphore.Release();
     }
 }
