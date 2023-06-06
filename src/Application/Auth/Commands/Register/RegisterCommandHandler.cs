@@ -23,10 +23,8 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, AuthRegRe
     
     public async Task<AuthRegResult> Handle(RegisterCommand command, CancellationToken cancellationToken)
     {   
-        await Task.CompletedTask;
-
          // Check if user exists
-        if (_authRepository.GetUserByUsername(command.Username) is not null)
+        if (await _authRepository.GetUserByUsernameAsync(command.Username) is not null)
         {
             throw new Exception("Internal Server Error");
         }
@@ -44,7 +42,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, AuthRegRe
             HashedPass
         );
         
-        _authRepository.AddUser(user);
+        await _authRepository.AddUserAsync(user);
 
         // Generate a new token
         var token = _jwtTokenGenerator.GenerateToken(user);
